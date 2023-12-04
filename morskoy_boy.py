@@ -65,3 +65,15 @@ def place_ships():
                 break
 
     return board
+
+def get_shot():
+    while True:
+        try:
+            # Convert input to uppercase for case-insensitive comparison
+            shot = input("Enter coordinates for your shot (e.g., A5): ").upper()
+            if len(shot) == 2 and 'A' <= shot[0] <= 'G' and '1' <= shot[1] <= '7':
+                return int(shot[1]) - 1, ord(shot[0]) - ord('A')
+            else:
+                print("Invalid input. Please enter a valid coordinate.")
+        except ValueError:
+            print("Invalid input. Please enter a valid coordinate.")
