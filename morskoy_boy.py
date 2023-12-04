@@ -45,3 +45,23 @@ def place_ships():
                     return False
 
         return True
+
+    for size, symbol in ships:
+        while True:
+            orientation = random.choice(['horizontal', 'vertical'])
+            if orientation == 'horizontal':
+                x = random.randint(0, 6 - size)
+                y = random.randint(0, 6)
+            else:
+                x = random.randint(0, 6)
+                y = random.randint(0, 6 - size)
+
+            if is_valid_placement(x, y, size, orientation, board):
+                for i in range(size):
+                    if orientation == 'horizontal':
+                        board[y][x + i] = symbol
+                    else:
+                        board[y + i][x] = symbol
+                break
+
+    return board
