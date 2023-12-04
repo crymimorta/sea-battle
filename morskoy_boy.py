@@ -34,3 +34,14 @@ def place_ships():
                         if board[y + j][x + i] != 'O':
                             return False
             return True
+
+        if orientation == 'horizontal':
+            for i in range(size):
+                if not is_clear(x + i, y) or not is_clear_around(x + i, y):
+                    return False
+        else:
+            for i in range(size):
+                if not is_clear(x, y + i) or not is_clear_around(x, y + i):
+                    return False
+
+        return True
