@@ -20,3 +20,9 @@ def place_ships():
     ships = [(3, 's'), (2, 'm'), (2, 'm'), (1, 's'), (1, 's'), (1, 's'), (1, 's')]
 
     board = [['O' for _ in range(7)] for _ in range(7)]
+
+    def is_valid_placement(x, y, size, orientation, board):
+        def is_clear(x, y):
+            if 0 <= x < 7 and 0 <= y < 7 and board[y][x] == 'O':
+                return True
+            return False
