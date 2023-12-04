@@ -26,3 +26,11 @@ def place_ships():
             if 0 <= x < 7 and 0 <= y < 7 and board[y][x] == 'O':
                 return True
             return False
+
+        def is_clear_around(x, y):
+            for i in range(-1, 2):
+                for j in range(-1, 2):
+                    if 0 <= x + i < 7 and 0 <= y + j < 7:
+                        if board[y + j][x + i] != 'O':
+                            return False
+            return True
