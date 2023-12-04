@@ -77,3 +77,65 @@ def get_shot():
                 print("Invalid input. Please enter a valid coordinate.")
         except ValueError:
             print("Invalid input. Please enter a valid coordinate.")
+
+def play_game():
+    clear()
+    print("Dear player, in my version of the game, if you hit, then 'H' from the word 'Hit' will be displayed on the board at this point, if you miss 'M' from the word 'Miss'.")
+    print("Thank you for your attention!")
+    sleep(10)
+    clear()
+
+    player_name = input("Enter your name: ")
+    shots = 0
+
+    while True:
+        clear()
+        print(f"Player: {player_name}\n")
+        board = place_ships()
+        hidden_board = [['O' for _ in range(7)] for _ in range(7)]
+
+        while True:
+            clear()
+            print_board(hidden_board)
+            row, col = get_shot()
+
+            if hidden_board[row][col] != 'O':
+                print("You've already shot at this location. Try again.")
+                continue
+
+            shots += 1
+
+            if board[row][col] != 'O':
+                print("Hit!")
+                sleep (2)
+                hidden_board[row][col] = 'H'
+            else:
+                print("Miss!")
+                sleep(2)
+                hidden_board[row][col] = 'M'
+
+            # Check if all ships are sunk
+            if all(cell != 'O' for row in board for cell in row):
+                print("Congratulations! You sank all the ships!")
+                print(f"You made {shots} shots.")
+                break
+
+            # Check if all ships are hit but not every cell is shot
+            if all(cell != 'O' for row in board for cell in row) and any(cell == 'O' for row in hidden_board for cell in row):
+                print("All ships are hit, but not every cell is shot. Game over.")
+                break
+
+            # Check if all cells are shot
+            if all(cell != 'O' for row in hidden_board for cell in row):
+                print("All cells are shot. Game over.")
+                break
+
+        play_again = input("Do you want to play again? (yes/no): ").lower()
+        if play_again != 'yes':
+            print("Game Over. Here is the sorted list of players:")
+            sleep(5)
+            # You can add your code to display a sorted list of players here.
+            break
+
+if __name__ == "__main__":
+    play_game()
